@@ -4,7 +4,7 @@ import { v4 } from "uuid";
 const todoSlice = createSlice({
   name: "todoSlice",
   initialState: {
-    data: [],
+    data: [{ id: 1, text: "Learn React", completed: false }],
   },
   reducers: {
     addTodo(state, { payload }) {
@@ -14,9 +14,10 @@ const todoSlice = createSlice({
       ];
     },
     toggleTodo(state, { payload }) {
-      state.data = state.data.map(
-        ({ id }) =>
-          (id = payload.id ? { ...state, completed: !state.completed } : state)
+      state.data = state.data.map((value) =>
+        value.id === payload.id
+          ? { ...value, completed: !value.completed }
+          : value
       );
     },
     removeTodo(state, { payload }) {
